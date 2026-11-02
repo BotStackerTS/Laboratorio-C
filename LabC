@@ -21,3 +21,22 @@ Ejemplos de preguntas de análisis y calculo analítico que el programa deberia 
       gravedad terrestre (g).
 
 */
+
+Investigación Previa y Analisis:
+  Como podemos apreciar en el enunciado, debemos hacer calculos matemáticos de física, más precisamente MRUV.
+    MRUV = Movimiento Rectilineo Uniformemente Variado.
+  Sacamos las siguientes variables y/o constantes:
+    v_0 = Velocidad inicial que es cero -> v_0 = 0 
+    y_e = Altura de la plataforma de lanzamiento que en este caso es cero -> y_e = 0
+    a_1 = Aceleración CONSTANTE que es igual a 20,0 m/s² entonces -> a_1 = 20,0 #metros por segundo m*s
+    1_! = tiempo en que los cohetes SRB se desacoplan -> 1_1 = 120,0 #segundos 
+  Luego del desacoplamiento la aceleración pasa a 12,5 m/s² entonces -> a_2 = 12,5 # metros por segundo m*s
+    h = Altura donde los motores se detienen a 160km es decir -> h = 160,0 
+
+  Para la pregunta 1 donde nos piden hallar la rapidez en cierto momento (que en este caso es t= 120,0s)
+    Para ello utilizaremos las ecuasiones de cinematica:
+      y_f1 = y_0 + (a_1 * t_1) 
+      y_f1 = y_e + (v_0 * t) + (0,5 * a_1 * (t * t))
+      y_f1 = Rapidez que se acanza hasta ese momento
+      y_f1 = Altitud que se alcanza hasta ese momento
+      
