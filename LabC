@@ -80,6 +80,50 @@ El resultado a_fg es un número real que actúa como múltiplo para representar 
 */
 
 
+#include <stdio.h>
+#include <math.h>
+
+int main() {
+    double v0 = 0.0;
+    double y0 = 0.0;
+    double a1 = 20.0;
+    double t1 = 120.0;
+    double a2 = 12.5;
+    double h_target = 160000.0;
+    double g = 9.80;
+
+    printf("  Simulador de MRUV  \n");
+    printf("Ingrese la aceleracion de la primera fase a1 (m/s^2) [Defecto 20,0]: ");
+    scanf("%lf", &a1);
+    printf("Ingrese el tiempo de descarte SRB t1 (s) [Defecto 120.0]: ");
+    scanf("%lf", &t1);
+    printf("Ingrese la aceleracion de la segunda fase a2 (m/s^2) [Defecto 12,5]: ");
+    scanf("%lf", &a2);
+    printf("Ingrese la altitud objetivo h (m) [Defecto 160.000,0]: ");
+    scanf("%lf", &h_target);
+
+    double v1 = v0 + a1 * t1;
+    double y1 = y0 + v0 * t1 + 0.5 * a1 * t1 * t1;
+
+    double delta_y = h_target - y1;
+    double discriminant = v1 * v1 + 2.0 * a2 * delta_y;
+    double t2 = (-v1 + sqrt(discriminant)) / a2;
+    double v2 = v1 + a2 * t2;
+
+    double t_caida = v2 / g;
+    double h_max = h_target + (v2 * v2) / (2.0 * g);
+
+    double a_mult = a1 / g;
+
+    printf("Resultados:\n");
+    printf("1. Rapidez v1 (a t = %.1f s): %.2f m/s\n", t1, v1);
+    printf("   Altitud y1 alcanzada: %.2f m (%.2f km)\n", y1, y1 / 1000.0);
+    printf("2. Rapidez maxima v2 (a h = %.1f m): %.2f m/s\n", h_target, v2);
+    printf("3. Altitud maxima en caida libre h_max: %.2f m (%.2f km)\n", h_max, h_max / 1000.0);
+    printf("4. Aceleracion maxima (fase 1) en multiplos de g: %.2f g\n", a_mult);
+    return 0;
+}
+
 
 
 
