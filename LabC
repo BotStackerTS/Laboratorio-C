@@ -68,8 +68,12 @@ Investigación Previa y Analisis:
       hmax = 160 + (V_2f*t_caida) - (9,8*(t_caida*t_caida))
       Aqui hallamos la hmas para cuanso la nave empieza a caer.
       
-
-
+La pregunta 4 es un cambio de variable por asi decir, teniendo en cuenta que durante la primera fase se experimenta una aceleración de: 
+      a_1= 20,0
+      expresarla en forma de múltiplo de la fuerza gravitatoria es contar siguiente ecuacion:
+      a_fg = a_1 / 9,8 (aquí obtenemos específicamente el múltiplo que la gravedad necesita para llegar a la aceleracion de la primera fase)
+      El resultado a_fg es un número real que actua como múltiplo para representar la aceleración a_1
+      Es decir: a_1 = (a_fg * g)
 
 
 
