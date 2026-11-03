@@ -52,3 +52,39 @@ Investigación Previa y Analisis:
       t_2 = sqrt((2*h)/a_2)
       #t_2 es el tiempo que toma la nave despues de desacoplar para llegar a la altura h
       v_2f = v_2i + (a_2*t_2)
+
+  La Solucion de la pregunta 3 se encuentra en el siguiente analisis:
+      Sabemos que la rapidez al llegar a la altura de 160m  es v_2f que se calculo anteirormente.
+      Esa es la rapidez final cuando llega a 160m, cuando se llega a 160m se toma en cuenta que ya no hay aceleracion sino desaceleracion provocada por la gravedad.
+      Para que empiece a "caer" la velocidad tiene que llegar a 0 e ir bajando (numeros negativos) ya que la nave sigue con una velocidad que va subiendo en h. 
+      Las incognitas son: hmax (altura maxima alcanzada antes de comenzar a caer) y t_caida (tiempo en que la velocidad llega a 0).
+      Para MRUV sabemos que V_final es 0 
+      V_final = V_inicial + a*t (donde reemplazamos la aceleracion por la gravvedad en numeros negativos ya que va en contra del sentido de la velocidad)
+      V_final = V_inicial - g*t (sienfo t el tiempo que tarda en llegar a 0)
+      Reemplazando con lo ya sabido: 0 = v_2f - (9,8*t_caida) #Tener en cuenta que la gravedad g = 9,8
+      Haciendo un despeje para hallar el tiempo de caida: t_caida = v_2f / 9,8 
+
+      Ahora teniendo el tiempo de caida, hallaremos la altura hmax (no olvidar que estamos en caida libre)
+      hmax = 160 + (V_2f*t_caida) - (9,8*(t_caida*t_caida))
+      Aqui hallamos la hmas para cuanso la nave empieza a caer.
+      
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
