@@ -20,8 +20,6 @@ Ejemplos de preguntas de análisis y calculo analítico que el programa deberia 
   4. Exprese la aceleración máxima experimentada por la tripulación durante la primera fase como múltiplo de la 
       gravedad terrestre (g).
 
-*/
-
 Investigación Previa y Analisis:
   Como podemos apreciar en el enunciado, debemos hacer calculos matemáticos de física, más precisamente MRUV.
     MRUV = Movimiento Rectilineo Uniformemente Variado.
@@ -75,6 +73,7 @@ La pregunta 4 es un cambio de variable por asi decir, teniendo en cuenta que dur
       El resultado a_fg es un número real que actua como múltiplo para representar la aceleración a_1
       Es decir: a_1 = (a_fg * g)
 
+*/
 
 
 
