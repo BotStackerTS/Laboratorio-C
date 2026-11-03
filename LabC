@@ -39,4 +39,16 @@ Investigación Previa y Analisis:
       y_f1 = y_e + (v_0 * t) + (0,5 * a_1 * (t * t))
       y_f1 = Rapidez que se acanza hasta ese momento
       y_f1 = Altitud que se alcanza hasta ese momento
-      
+
+  Para la pregunta 2, donde nos pide la rapidez maxima v_2 de la nave cuando alcanza la altura h=160,0 , utilizaremos la siguiente ecuación de cinemática dividida en dos partes debido al cambio de la aceleración:
+      v_2i = v_0 + (a_1*t_1)
+      #v_2i = La rapidez que se alcanzó en ese punto que tomaremos como velocidad inicial para calculos posteriores
+
+      x = x_0 + (v_0*t)+(1/2*a*(t*t))
+      De esta ecuación, despejamos tiempo:
+      t = sqrt((2*(X-X_0))/a_2)
+      #sqrt() nos permite hallar la raíz cuadrada
+      Transformamos con las variables que tenemos 
+      t_2 = sqrt((2*h)/a_2)
+      #t_2 es el tiempo que toma la nave despues de desacoplar para llegar a la altura h
+      v_2f = v_2i + (a_2*t_2)
