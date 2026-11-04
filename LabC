@@ -80,49 +80,247 @@ El resultado a_fg es un número real que actúa como múltiplo para representar 
 */
 
 
+
 #include <stdio.h>
 #include <math.h>
 
-int main() {
+#define GRAVEDAD 9.80
+
+// Funcion para leer y validar los datos ingresados
+double leerNumero(const char mensaje[], double defecto, double minimo, double maximo) {
+
+    char entrada[100];
+    char extra;
+    double numero;
+    int i, vacia, resultado, completa;
+
+    do {
+        printf("%s [Defecto: %.2f]: ", mensaje, defecto);
+
+        if (fgets(entrada, 100, stdin) == NULL) {
+            printf("ERROR: No se pudo leer el dato.\n");
+            return -1.0;
+        }
+
+        // Verificar que la entrada no sea demasiado larga
+        completa = 0;
+
+        for (i = 0; entrada[i] != '\0'; i++) {
+            if (entrada[i] == '\n') {
+                completa = 1;
+            }
+
+            // Permitir coma decimal
+            if (entrada[i] == ',') {
+                entrada[i] = '.';
+            }
+        }
+
+        if (completa == 0) {
+            int c;
+
+            while ((c = getchar()) != '\n' && c != EOF) {
+            }
+
+            printf("ERROR: La entrada es demasiado larga.\n\n");
+        } else {
+
+            // Comprobar si el usuario presiono Enter
+            vacia = 1;
+
+            for (i = 0; entrada[i] != '\0'; i++) {
+                if (entrada[i] != ' ' &&
+                    entrada[i] != '\t' &&
+                    entrada[i] != '\n' &&
+                    entrada[i] != '\r') {
+
+                    vacia = 0;
+                }
+            }
+
+            if (vacia == 1) {
+                return defecto;
+            }
+
+            // Convertir y validar el numero
+            resultado = sscanf(entrada, " %lf %c", &numero, &extra);
+
+            if (resultado != 1) {
+                printf("ERROR: Ingrese solamente un numero.\n\n");
+            } else {
+                if (!(numero >= minimo && numero <= maximo)) {
+                    printf("ERROR: El valor debe estar entre %.2f y %.2f.\n\n",
+                           minimo, maximo);
+                } else {
+                    return numero;
+                }
+            }
+        }
+
+    } while (1);
+}
+
+int main(void) {
+
+    // Declaracion de variables
     double v0 = 0.0;
     double y0 = 0.0;
-    double a1 = 20.0;
-    double t1 = 120.0;
-    double a2 = 12.5;
-    double h_target = 160000.0;
-    double g = 9.80;
 
-    printf("  Simulador de MRUV  \n");
-    printf("Ingrese la aceleracion de la primera fase a1 (m/s^2) [Defecto 20,0]: ");
-    scanf("%lf", &a1);
-    printf("Ingrese el tiempo de descarte SRB t1 (s) [Defecto 120.0]: ");
-    scanf("%lf", &t1);
-    printf("Ingrese la aceleracion de la segunda fase a2 (m/s^2) [Defecto 12,5]: ");
-    scanf("%lf", &a2);
-    printf("Ingrese la altitud objetivo h (m) [Defecto 160.000,0]: ");
-    scanf("%lf", &h_target);
+    double a1, t1, a2, h_target;
+    double v1, y1;
+    double delta_y, discriminante, t2, v2;
+    double t_ascenso_libre, h_max, a_mult;
 
-    double v1 = v0 + a1 * t1;
-    double y1 = y0 + v0 * t1 + 0.5 * a1 * t1 * t1;
+    printf("========================================\n");
+    printf("       SIMULADOR DE MRUV - SLS\n");
+    printf("========================================\n");
 
-    double delta_y = h_target - y1;
-    double discriminant = v1 * v1 + 2.0 * a2 * delta_y;
-    double t2 = (-v1 + sqrt(discriminant)) / a2;
-    double v2 = v1 + a2 * t2;
+    printf("Presione Enter para utilizar el valor por defecto.\n\n");
 
-    double t_caida = v2 / g;
-    double h_max = h_target + (v2 * v2) / (2.0 * g);
+    // INGRESO DE DATOS
 
-    double a_mult = a1 / g;
+    a1 = leerNumero(
+        "Aceleracion de la primera fase a1 (m/s^2)",
+        20.0, 0.01, 1000.0
+    );
 
-    printf("Resultados:\n");
-    printf("1. Rapidez v1 (a t = %.1f s): %.2f m/s\n", t1, v1);
-    printf("   Altitud y1 alcanzada: %.2f m (%.2f km)\n", y1, y1 / 1000.0);
-    printf("2. Rapidez maxima v2 (a h = %.1f m): %.2f m/s\n", h_target, v2);
-    printf("3. Altitud maxima en caida libre h_max: %.2f m (%.2f km)\n", h_max, h_max / 1000.0);
-    printf("4. Aceleracion maxima (fase 1) en multiplos de g: %.2f g\n", a_mult);
+    if (a1 < 0.0) {
+        return 1;
+    }
+
+    t1 = leerNumero(
+        "Tiempo de desacople SRB t1 (s)",
+        120.0, 0.01, 10000.0
+    );
+
+    if (t1 < 0.0) {
+        return 1;
+    }
+
+    a2 = leerNumero(
+        "Aceleracion de la segunda fase a2 (m/s^2)",
+        12.5, 0.01, 1000.0
+    );
+
+    if (a2 < 0.0) {
+        return 1;
+    }
+
+    // PREGUNTA 1: PRIMERA FASE
+
+    v1 = v0 + a1 * t1;
+
+    y1 = y0 + v0 * t1 + 0.5 * a1 * t1 * t1;
+
+    // INGRESO Y VALIDACION DE ALTITUD OBJETIVO
+
+    do {
+
+        h_target = leerNumero(
+            "Altitud objetivo h (m)",
+            160000.0, 0.01, 1000000000000.0
+        );
+
+        if (h_target < 0.0) {
+            return 1;
+        }
+
+        if (h_target <= y1) {
+
+            printf("\nERROR: La altitud objetivo debe ser");
+            printf(" mayor que la altitud alcanzada");
+            printf(" durante la primera fase.\n");
+
+            printf("Altitud de la primera fase: %.2f m\n\n", y1);
+        }
+
+    } while (h_target <= y1);
+
+    // PREGUNTA 2: SEGUNDA FASE
+
+    delta_y = h_target - y1;
+
+    discriminante = v1 * v1 + 2.0 * a2 * delta_y;
+
+    v2 = sqrt(discriminante);
+
+    t2 = (2.0 * delta_y) / (v1 + v2);
+
+    // PREGUNTA 3: ASCENSO LIBRE
+
+    t_ascenso_libre = v2 / GRAVEDAD;
+
+    h_max = h_target + (v2 * v2) / (2.0 * GRAVEDAD);
+
+    // PREGUNTA 4: ACELERACION COMO MULTIPLO DE G
+
+    a_mult = a1 / GRAVEDAD;
+
+    // PRESENTACION DE RESULTADOS
+
+    printf("\n========================================\n");
+    printf("         RESULTADOS DE LA MISION\n");
+    printf("========================================\n");
+
+    printf("\n1. PRIMERA FASE - DESACOPLE SRB\n");
+
+    printf("Tiempo transcurrido: %.2f s\n", t1);
+    printf("Rapidez v1: %.2f m/s\n", v1);
+
+    printf("Altitud y1: %.2f m (%.2f km)\n", y1, y1 / 1000.0);
+
+    printf("\n2. SEGUNDA FASE - APAGADO DE MOTORES\n");
+
+    printf("Altitud objetivo: %.2f m\n", h_target);
+    printf("Desplazamiento: %.2f m\n", delta_y);
+    printf("Tiempo de segunda fase: %.2f s\n", t2);
+    printf("Rapidez maxima v2: %.2f m/s\n", v2);
+
+    printf("\n3. ASCENSO LIBRE\n");
+
+    printf("Tiempo adicional de ascenso: %.2f s\n",
+           t_ascenso_libre);
+
+    printf("Altitud maxima h_max: %.2f m (%.2f km)\n", h_max, h_max / 1000.0);
+
+    printf("\n4. ACELERACION COMO MULTIPLO DE G\n");
+
+    printf("Aceleracion de primera fase: %.2f m/s^2\n", a1);
+
+    printf("Equivalencia respecto de g: %.2f g\n", a_mult);
+
+    printf("\n========================================\n");
+    printf("         SIMULACION FINALIZADA\n");
+    printf("========================================\n");
+
     return 0;
 }
+
+
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
 
 
 
