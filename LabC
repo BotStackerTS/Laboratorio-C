@@ -87,166 +87,6 @@ El resultado a_fg es un número real que actúa como múltiplo para representar 
 #define GRAVEDAD 9.80
 
 // Funcion para leer y validar los datos ingresados
-double leerNumero(const char mensaje[], double defecto, double minimo, double maximo) {
-
-    char entrada[100];
-    char extra;
-    double numero;
-    int i, vacia, resultado, completa;
-
-    do {
-        printf("%s [Defecto: %.2f]: ", mensaje, defecto);
-
-        if (fgets(entrada, 100, stdin) == NULL) {
-            printf("ERROR: No se pudo leer el dato.\n");
-            return -1.0;
-        }
-
-        // Verificar que la entrada no sea demasiado larga
-        completa = 0;
-
-        for (i = 0; entrada[i] != '\0'; i++) {
-            if (entrada[i] == '\n') {
-                completa = 1;
-            }
-
-            // Permitir coma decimal
-            if (entrada[i] == ',') {
-                entrada[i] = '.';
-            }
-        }
-
-        if (completa == 0) {
-            int c;
-
-            while ((c = getchar()) != '\n' && c != EOF) {
-            }
-
-            printf("ERROR: La entrada es demasiado larga.\n\n");
-        } else {
-
-            // Comprobar si el usuario presiono Enter
-            vacia = 1;
-
-            for (i = 0; entrada[i] != '\0'; i++) {
-                if (entrada[i] != ' ' &&
-                    entrada[i] != '\t' &&
-                    entrada[i] != '\n' &&
-                    entrada[i] != '\r') {
-
-                    vacia = 0;
-                }
-            }
-
-            if (vacia == 1) {
-                return defecto;
-            }
-
-            // Convertir y validar el numero
-            resultado = sscanf(entrada, " %lf %c", &numero, &extra);
-
-            if (resultado != 1) {
-                printf("ERROR: Ingrese solamente un numero.\n\n");
-            } else {
-                if (!(numero >= minimo && numero <= maximo)) {
-                    printf("ERROR: El valor debe estar entre %.2f y %.2f.\n\n",
-                           minimo, maximo);
-                } else {
-                    return numero;
-                }
-            }
-        }
-
-    } while (1);
-}
-
-int main(void) {
-
-    // Declaracion de variables
-    double v0 = 0.0;
-    double y0 = 0.0;
-
-    double a1, t1, a2, h_target;
-    double v1, y1;
-    double delta_y, discriminante, t2, v2;
-    double t_ascenso_libre, h_max, a_mult;
-
-    printf("========================================\n");
-    printf("       SIMULADOR DE MRUV - SLS\n");
-    printf("========================================\n");
-
-    printf("Presione Enter para utilizar el valor por defecto.\n\n");
-
-    // INGRESO DE DATOS
-
-    a1 = leerNumero(
-        "Aceleracion de la primera fase a1 (m/s^2)",
-        20.0, 0.01, 1000.0
-    );
-
-    if (a1 < 0.0) {
-        return 1;
-    }
-
-    t1 = leerNumero(
-        "Tiempo de desacople SRB t1 (s)",
-        120.0, 0.01, 10000.0
-    );
-
-    if (t1 < 0.0) {
-        return 1;
-    }
-
-    a2 = leerNumero(
-        "Aceleracion de la segunda fase a2 (m/s^2)",
-        12.5, 0.01, 1000.0
-    );
-
-    if (a2 < 0.0) {
-        return 1;
-    }
-
-    // PREGUNTA 1: PRIMERA FASE
-
-    v1 = v0 + a1 * t1;
-
-    y1 = y0 + v0 * t1 + 0.5 * a1 * t1 * t1;
-
-    // INGRESO Y VALIDACION DE ALTITUD OBJETIVO
-
-    do {
-
-        h_target = leerNumero(
-            "Altitud objetivo h (m)",
-            160000.0, 0.01, 1000000000000.0
-        );
-
-        if (h_target < 0.0) {
-            return 1;
-        }
-
-        if (h_target <= y1) {
-
-            printf("\nERROR: La altitud objetivo debe ser");
-            printf(" mayor que la altitud alcanzada");
-            printf(" durante la primera fase.\n");
-
-            printf("Altitud de la primera fase: %.2f m\n\n", y1);
-        }
-
-    } while (h_target <= y1);
-
-    // PREGUNTA 2: SEGUNDA FASE
-
-    delta_y = h_target - y1;
-
-    discriminante = v1 * v1 + 2.0 * a2 * delta_y;
-#include <stdio.h>
-#include <math.h>
-
-#define GRAVEDAD 9.80
-
-// Funcion para leer y validar los datos ingresados
 double leerNumero(const char mensaje[], double defecto,
                   double minimo, double maximo) {
 
@@ -337,12 +177,40 @@ void dibujarFase1(void) {
     printf("         |  |  | SLS |  |  |\n");
     printf("         |SRB| |     | |SRB|\n");
     printf("         |  |  |     |  |  |\n");
-    printf("         |__|  |_____|  |__|\n");
+    printf("         |_|  |_|  |_|\n");
     printf("          ||      ||     ||\n");
     printf("         /\\/\\    /\\/\\   /\\/\\\n");
     printf("        /\\/\\/\\  /\\/\\/\\ /\\/\\/\\\n");
 
     printf("\n            ASCENSO VERTICAL\n");
+    printf("========================================\n");
+}
+
+// DIBUJO DE LA SEGUNDA FASE
+void dibujarFase2(void) {
+
+    printf("\n========================================\n");
+    printf("     FASE 2 - ASCENSO CON MOTOR\n");
+    printf("========================================\n");
+
+    printf("                  /\\\n");
+    printf("                 /  \\\n");
+    printf("                /ORION\\\n");
+    printf("                |     |\n");
+    printf("                | SLS |\n");
+    printf("                |     |\n");
+    printf("                |     |\n");
+    printf("                |___|\n");
+    printf("                   ||\n");
+    printf("                  /\\/\\\n");
+    printf("                 /\\/\\/\\\n");
+
+    printf("\n          SRB             SRB\n");
+    printf("           \\               /\n");
+    printf("            \\             /\n");
+    printf("             v           v\n");
+
+    printf("\n       PROPULSORES DESACOPLADOS\n");
     printf("========================================\n");
 }
 
@@ -460,7 +328,9 @@ int main(void) {
     printf("Altitud y1: %.2f m (%.2f km)\n",
            y1, y1 / 1000.0);
 
-    // RESULTADOS DE LA SEGUNDA FASE
+    // DIBUJO Y RESULTADOS DE LA SEGUNDA FASE
+
+    dibujarFase2();
 
     printf("\n2. SEGUNDA FASE - APAGADO DE MOTORES\n");
 
@@ -493,7 +363,6 @@ int main(void) {
 
     return 0;
 }
-
 
 
 
