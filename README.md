@@ -60,3 +60,16 @@ hMax = h + v2² / (2 * g)
 
 aceleracionEnG = a1 / g
 
+
+# 3. Funcionamiento del programa
+
+El simulador tiene el siguiente menú interactivo:
+
+Configurar parámetros de la misión.
+Iniciar simulación por eventos.
+Ver reporte de la última misión.
+Consultar historial de simulaciones.
+Restaurar valores iniciales.
+Salir (opción 0).
+
+Durante la simulación se muestran los eventos de desacople de SRB, apagado de motores y altura máxima, acompañados por dibujos en consola realizados con printf().
