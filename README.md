@@ -24,5 +24,39 @@ Utilizamos ecuaciones del Movimiento Rectilíneo Uniformemente Variado (MRUV) pa
 
 El simulador permite modificar parámetros, visualizar eventos, consultar resultados y almacenar un historial de hasta diez misiones.
 
+# 2. Análisis de la situación problemática
 
+Se parte de las siguientes condiciones iniciales:
+
+Velocidad inicial (v0) = 0 m/s
+Altura inicial (y0)  = 0 m
+Aceleración inicial (a1) =  20 m/s²
+Tiempo de desacople (t1) = 120 s
+Aceleración segunda fase (a2) = 12,5 m/s²
+Altura objetivo (h) = 160.000 m
+Gravedad (g) = 9,80 m/s²
+El programa responde cuatro preguntas:
+
+1. Velocidad y altura al desacople de los SRB
+
+Aplicamos las siguientes ecuaciones:
+v1 = v0 + a1 * t1
+y1 = y0 + v0 * t1 + 0.5 * a1 * t1²
+
+2. Velocidad al apagar los motores
+
+Primero se calcula el desplazamiento pendiente:
+deltaY = h - y1
+Luego se obtiene la velocidad:
+v2 = sqrt(v1² + 2 * a2 * deltaY)
+
+3. Altura máxima durante el ascenso libre
+
+Después del apagado de motores, la gravedad disminuye la velocidad ascendente hasta cero.
+tiempoAscensoLibre = v2 / g
+hMax = h + v2² / (2 * g)
+
+4. Aceleración como múltiplo de la gravedad
+
+aceleracionEnG = a1 / g
 
