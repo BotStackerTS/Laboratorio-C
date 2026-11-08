@@ -13,8 +13,13 @@
   Comisión: K1.4
   
   Integrantes: 
-      Halier, Fiorella Estefania
-      
+  
+  - Eiden, Aldana
+  - Halier, Fiorella Estefania
+  - Maciel, Julieta Andrea
+  - Sosa, Tomas      
+  - Schiaffino, Danilo Jesus
+    
 
 # 1. Descripción del TFI 
 
@@ -30,12 +35,19 @@ El simulador permite modificar parámetros, visualizar eventos, consultar result
 Se parte de las siguientes condiciones iniciales:
 
 Velocidad inicial (v0) = 0 m/s
+
 Altura inicial (y0)  = 0 m
+
 Aceleración inicial (a1) =  20 m/s²
+
 Tiempo de desacople (t1) = 120 s
+
 Aceleración segunda fase (a2) = 12,5 m/s²
+
 Altura objetivo (h) = 160.000 m
+
 Gravedad (g) = 9,80 m/s²
+
 El programa responde cuatro preguntas:
 
 1. Velocidad y altura al desacople de los SRB
@@ -54,7 +66,9 @@ v2 = sqrt(v1² + 2 * a2 * deltaY)
 3. Altura máxima durante el ascenso libre
 
 Después del apagado de motores, la gravedad disminuye la velocidad ascendente hasta cero.
+
 tiempoAscensoLibre = v2 / g
+
 hMax = h + v2² / (2 * g)
 
 4. Aceleración como múltiplo de la gravedad
@@ -65,13 +79,12 @@ aceleracionEnG = a1 / g
 # 3. Funcionamiento del programa
 
 El simulador tiene el siguiente menú interactivo:
-
-Configurar parámetros de la misión.
-Iniciar simulación por eventos.
-Ver reporte de la última misión.
-Consultar historial de simulaciones.
-Restaurar valores iniciales.
-Salir (opción 0).
+  - Configurar parámetros de la misión (opción 1)
+  - Iniciar simulación por eventos (opción 2)
+  - Ver reporte de la última misión (opción 3)
+  - Consultar historial de simulaciones (opción 4)
+  - Restaurar valores iniciales (opción 5)
+  - Salir (opción 0).
 
 Durante la simulación se muestran los eventos de desacople de SRB, apagado de motores y altura máxima, acompañados por dibujos en consola realizados con printf().
 
@@ -102,11 +115,11 @@ El programa fue desarrollado en lenguaje C y actualmente se encuentra integrado 
 
 Para compilar el programa utilizando GCC:
 
-  gcc main.c -o simulados_sls -1m
+- gcc main.c -o simulados_sls -1m
 
 Para ejecutarlos en Windows: 
 
-  .\simulador_sls.exe
+- .\simulador_sls.exe
 
 
 # 6. Pruebas y Validaciones
@@ -114,9 +127,13 @@ Para ejecutarlos en Windows:
 Con los valores originales del enunciado se obtienen los siguientes resultados:
 
 Rapidez al desacople = 2400,00 m/s
+
 Altura al desacople = 144.000,00 m
+
 Rapidez al apagado de motores = 2481,93 m/s
+
 Altura máxima = 474.284,71 m
+
 Aceleración en múltiplos de g = 2,04 g
 
 El programa contempla la validación de entradas no numéricas, valores fuera de rango, alturas objetivos compatibles y opciones incorrectas del menú.
@@ -128,20 +145,36 @@ Se utilizó ChatGPT (OpenIA) como herramienta de apoyo durante el desarrollo del
 
 Consultas y tareas realizadas:
 
-  Revisión de fórmulas y cálculos físicos del MRUV.
-  Corrección de errores y sugerencias para mejorar las validaciones.
-  Incorporación de dibujos en consola mediante printf().
-  Ayuda en el diseño de las representaciones gráficas.
+ - Revisión de fórmulas y cálculos físicos del MRUV.
+ - Corrección de errores y sugerencias para mejorar las validaciones.
+ - Incorporación de dibujos en consola mediante printf().
+ - Ayuda en el diseño de las representaciones gráficas.
 
 Algunas de las preguntas para la IA fueron las siguientes:
 
   ¿Cómo se puede evitar que el código acepte valores negativos, letras o alturas que no sean compatibles con la simulación?
+  
   ¿Cómo hago para que el código permita que el usuario vuelva a ingresar un dato cuando comete un error, sin que el programa se cierre?
+  
   ¿Cómo se puede incorporar figuras al programa sin modificar las fórmulas ni los resultados?
+  
   ¿Cómo puedo hacer para incorporar representaciones gráficas en un código en lenguaje C?
+  
   ¿Cómo se pueden utilizar caracteres y símbolos para crear representaciones visuales claras y comprensibles?
 
 Supervisión y verificación del equipo:
 
 Cada vez que se utilizó la inteligencia artificial como herramienta de apoyo, las respuestas y sugerencias obtenidas fueron revisadas por los integrantes del equipo, comparando la información con los materiales proporcionados por la cátedra.
 De esta forma buscamos garantizar que las modificaciones fueran correctas y acordes con los contenidos estudiados.
+
+
+# 8. Conclusión
+
+El desarrollo del simulador SLS permitió integrar los conocimientos adquiridos en la cátedra de Algoritmos y Estructuras de Datos con la resolución de una situación problemática basada en el Movimiento Rectilíneo Uniformemente Variado (MRUV).
+
+A lo largo del TFI aplicamos distintos recursos del lenguaje C, como funciones, estructuras de control, arreglos, registros y punteros, para organizar la información y realizar los cálculos correspondientes a las etapas del ascenso.
+
+Además, la incorporación de validaciones, un menú interactivo, simulación por eventos y representaciones visuales en consola permitió mejorar el funcionamiento del programa y facilitar la interpretación de los resultados.
+
+Este trabajo nos permitió llevar los conceptos teóricos a una aplicación práctica, fortalecer nuestras habilidades de programación, resolución de problemas y organización del código, y comprender la importancia de desarrollar soluciones claras, funcionales y verificables.
+
