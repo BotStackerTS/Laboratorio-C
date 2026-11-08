@@ -120,3 +120,28 @@ Altura máxima = 474.284,71 m
 Aceleración en múltiplos de g = 2,04 g
 
 El programa contempla la validación de entradas no numéricas, valores fuera de rango, alturas objetivos compatibles y opciones incorrectas del menú.
+
+
+# 7. Uso de Inteligencia Artificial
+
+Se utilizó ChatGPT (OpenIA) como herramienta de apoyo durante el desarrollo del proyecto.
+
+Consultas y tareas realizadas:
+
+  Revisión de fórmulas y cálculos físicos del MRUV.
+  Corrección de errores y sugerencias para mejorar las validaciones.
+  Incorporación de dibujos en consola mediante printf().
+  Ayuda en el diseño de las representaciones gráficas.
+
+Algunas de las preguntas para la IA fueron las siguientes:
+
+  ¿Cómo se puede evitar que el código acepte valores negativos, letras o alturas que no sean compatibles con la simulación?
+  ¿Cómo hago para que el código permita que el usuario vuelva a ingresar un dato cuando comete un error, sin que el programa se cierre?
+  ¿Cómo se puede incorporar figuras al programa sin modificar las fórmulas ni los resultados?
+  ¿Cómo puedo hacer para incorporar representaciones gráficas en un código en lenguaje C?
+  ¿Cómo se pueden utilizar caracteres y símbolos para crear representaciones visuales claras y comprensibles?
+
+Supervisión y verificación del equipo:
+
+Cada vez que se utilizó la inteligencia artificial como herramienta de apoyo, las respuestas y sugerencias obtenidas fueron revisadas por los integrantes del equipo, comparando la información con los materiales proporcionados por la cátedra.
+De esta forma buscamos garantizar que las modificaciones fueran correctas y acordes con los contenidos estudiados.
