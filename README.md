@@ -24,6 +24,7 @@ Utilizamos ecuaciones del Movimiento Rectilíneo Uniformemente Variado (MRUV) pa
 
 El simulador permite modificar parámetros, visualizar eventos, consultar resultados y almacenar un historial de hasta diez misiones.
 
+
 # 2. Análisis de la situación problemática
 
 Se parte de las siguientes condiciones iniciales:
@@ -73,3 +74,37 @@ Restaurar valores iniciales.
 Salir (opción 0).
 
 Durante la simulación se muestran los eventos de desacople de SRB, apagado de motores y altura máxima, acompañados por dibujos en consola realizados con printf().
+
+
+# 4. Estructuras y recursos utilizados 
+
+Para desarrollar el simulador se aplicaron los siguientes contenidos de Algoritmo y Estructuras de Datos, utilizando el lenguaje C.
+
+- Tipos de datos variables: utilización de int, double y char para almacenar parámetros, resultados y opciones del programa.
+- Constantes: definición de valores fijos mediante #define, como la gravedad terrestre y los tamaños máximos de los arreglos.
+-  Operadores aritméticos, relacionales y lógicos: implementación de las ecuaciones del MRUV y comparación de valores para validar condiciones.
+-  Estructuras secuenciales: ejecución ordenada de instrucciones para calcular las distintas etapas del ascenso.
+-  Estructuras condicionales: utilización de if y else para controlar el menú, las validaciones y la decisiónes del simulador.
+-  Estructuras repetitivas: utilización de while, do while y for para repetir el menú, solicitar datos correctos y recorrer arreglos.
+-  Funciones y procedimientos: modularización lógica del programa para separar la lectura de datos, los cálculos físicos, los dibujos y la presentación de resultados.
+-  Parámetros y paso por referencia: utilización de punteros para modificar configuraciones y devolver resultados desde las funciones.
+-  Arreglos unidimensionales: almacenamiento de los eventos de cada misión y del historial de hasta diez simulaciones.
+-  Registros y estructuras (struct): organización de los datos mediante las estructuras Configuración, Evento y Misión.
+-  Punteros: acceso a los datos de las estructuras mediante operadores como &, * y ->.
+-  Cadenas de caracteres: almacenamiento de los nombres de los aventos y procesamientos de las entradas del usuario.
+-  Validación de datos: utilización de print(), fgets() y sscanf() para interactuar con el usuario.
+-  Bibliotecas estandar: uso de stdio.h para entrada y salida, y math.h para cálculos matemáticos mediante sqrt().
+
+
+# 5. Compilación y ejecución
+
+El programa fue desarrollado en lenguaje C y actualmente se encuentra integrado en un único archivo main.c.
+
+Para compilar el programa utilizando GCC:
+
+  gcc main.c -o simulados_sls -1m
+
+Para ejecutarlos en Windows: 
+
+  .\simulador_sls.exe
+
