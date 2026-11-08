@@ -108,3 +108,15 @@ Para ejecutarlos en Windows:
 
   .\simulador_sls.exe
 
+
+# 6. Pruebas y Validaciones
+
+Con los valores originales del enunciado se obtienen los siguientes resultados:
+
+Rapidez al desacople = 2400,00 m/s
+Altura al desacople = 144.000,00 m
+Rapidez al apagado de motores = 2481,93 m/s
+Altura máxima = 474.284,71 m
+Aceleración en múltiplos de g = 2,04 g
+
+El programa contempla la validación de entradas no numéricas, valores fuera de rango, alturas objetivos compatibles y opciones incorrectas del menú.
