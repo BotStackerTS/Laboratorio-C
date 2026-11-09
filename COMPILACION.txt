@@ -1,1 +1,20 @@
+COMPILACION DEL SIMULADOR ARTEMIS SLS
+
+En Windows con GCC (MinGW):
+  gcc main.c simulador.c validaciones.c -o simulador_sls.exe -lm
+  .\simulador_sls.exe
+
+En Linux o macOS con GCC:
+  gcc main.c simulador.c validaciones.c -o simulador_sls -lm
+  ./simulador_sls
+
+Opcional con make:
+  make
+  ./simulador_sls
+
+Archivos: main.c, simulador.c, simulador.h, validaciones.c,
+validaciones.h y Makefile.
+
+El codigo se separo en archivos manteniendo el funcionamiento
+original del simulador con menu 0-5, eventos, historial y validaciones.
 
